@@ -13,6 +13,7 @@ public class Link implements Comparable<Link> {
   public City city1;
   public City city2;
   public int length;
+  public String color;
   /* true if and only if this link is part of the set of shortest paths */
   public boolean used = true;
 
@@ -20,7 +21,7 @@ public class Link implements Comparable<Link> {
    * The City alphanumerically smaller is stored as city1 and the other will be city2
    * add the link to both cities
    */
-  public Link(City c1, City c2, int len) {
+  public Link(City c1, City c2, int len, String colour) {
     if (c1.compareTo(c2) < 0) {
       city1 = c1;
       city2 = c2;
@@ -29,6 +30,7 @@ public class Link implements Comparable<Link> {
       city2 = c1;
     }
     length = len;
+    color = colour;
     c1.addLink(this);
     c2.addLink(this);
   }
@@ -37,6 +39,8 @@ public class Link implements Comparable<Link> {
   public int getLength() {
     return length;
   }
+
+  public String getColor() { return color; }
 
   /* get the opposite city from c
    * return city1 if c is city2
@@ -61,10 +65,15 @@ public class Link implements Comparable<Link> {
    * e.g. "City1 3 City2"
    * The city names should be in sorted order, e.g. Halifax comes before Toronto
    */
+//  public String toString() {
+//    return city1.toString() + " " + length + " " + city2.toString();
+//  }
   public String toString() {
-    return city1.toString() + " " + length + " " + city2.toString();
+    if(color==null){
+      return city1.toString() + " " + length + " " + city2.toString();
+    }
+    return city1.toString() + " " + length + " " + city2.toString()+ " "+color;
   }
-
   /* compare this Link to Link l
    * returns 0 if both links have the same city1 and city2
    * return negative int if this.city1 < l.city1 or the city1 are equal and this.city2 < l.city2

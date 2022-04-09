@@ -73,13 +73,15 @@ public class City {
    * return true if a path is found and false otherwise
    * add the followed Links to routeLinks
    */
-  public boolean getLinksTo(City dest, Set<Link> routeLinks) {
+  public boolean getLinksTo(City dest, Set<Link> routeLinks, String color) {
     for (Link l : links) {
-      if (l.isUsed() && (l != parent)) {
-        City child = l.getAdj(this);
-        if ((dest == child) || child.getLinksTo(dest, routeLinks)) {
-          routeLinks.add(l);
-          return true;
+        if (l.isUsed() && (l != parent)) {
+          if(l.getColor() == null || (l.getColor().equals(color))) {
+          City child = l.getAdj(this);
+          if ((dest == child) || child.getLinksTo(dest, routeLinks, color)) {
+            routeLinks.add(l);
+            return true;
+          }
         }
       }
     }
@@ -94,7 +96,7 @@ public class City {
    * postcondition: every City.distance is the shortest distance from this to that City
    * postcondition: every City.parent is the Link before that City in the set of shortest paths
    */
-  public void makeTree() {
+  public void makeTree(String colour) {
     Comparator<City> comparator = new CityComparator();
     PriorityQueue<City> pq = new PriorityQueue<City>(comparator);
     for (City c : cities.values()) {
@@ -119,15 +121,17 @@ public class City {
       tree.add(city);
 
       for (Link l : city.links) {
-        City child = l.getAdj(city);
-        if (!tree.contains(child)) {
-          int length = l.getLength();
-          
-          if (child.distance > city.distance + length) {
-            pq.remove(child);
-            child.distance = city.distance + length;
-            child.parent = l;
-            pq.add(child);
+        if(l.getColor() == null || l.getColor().equals(colour)) {
+          City child = l.getAdj(city);
+          if (!tree.contains(child)) {
+            int length = l.getLength();
+
+            if (child.distance > city.distance + length) {
+              pq.remove(child);
+              child.distance = city.distance + length;
+              child.parent = l;
+              pq.add(child);
+            }
           }
         }
       }

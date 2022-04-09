@@ -1,0 +1,16 @@
+List of Refactorings
+====================
+
+Name/Banner# of Developer 1: Mansi Patel/B00871094
+
+Refactorings:
+=============
+
+1.
+   File: City.java
+   Location (method/approx. line #):
+   Description:  Make a new class for players which has list of players and the
+                 color the player has chosen. This in turn will be linked to city
+                 where it will create links of that particular colour
+   Implemented: No
+   

@@ -34,11 +34,22 @@ class LinkTest {
   void getLength() {
     City city1 = new City(city1Name);
     City city2 = new City(city2Name);
-    Link link = new Link(city1, city2, cityDistance);
+    Link link = new Link(city1, city2, cityDistance,null);
     int expectedDistance = cityDistance;
     int resultDistance = link.getLength();
     City.cities.clear();
     assertEquals(expectedDistance, resultDistance, "getLength returned wrong value");
+  }
+
+  @Test
+  void getColor() {
+    City city1 = new City(city1Name);
+    City city2 = new City(city2Name);
+    Link link = new Link(city1, city2, cityDistance,"green");
+    String expectedColor = "green";
+    String resultColor = link.getColor();
+    City.cities.clear();
+    assertEquals(expectedColor, resultColor, "getColor returned wrong value");
   }
 
   /* 2. getAdj() black-box */
@@ -47,7 +58,7 @@ class LinkTest {
   void getAdj_city1() {
     City city1 = new City(city1Name);
     City city2 = new City(city2Name);
-    Link link = new Link(city1, city2, cityDistance);
+    Link link = new Link(city1, city2, cityDistance,null);
     String expectedString = city1Name;
     String resultString = link.getAdj(city2).toString();
     City.cities.clear();
@@ -59,7 +70,7 @@ class LinkTest {
   void getAdj_city2() {
     City city1 = new City(city1Name);
     City city2 = new City(city2Name);
-    Link link = new Link(city1, city2, cityDistance);
+    Link link = new Link(city1, city2, cityDistance,null);
     String expectedString = city2Name;
     String resultString = link.getAdj(city1).toString();
     City.cities.clear();
@@ -72,7 +83,7 @@ class LinkTest {
   void isUsed_true() {
     City city1 = new City(city1Name);
     City city2 = new City(city2Name);
-    Link link = new Link(city1, city2, cityDistance);
+    Link link = new Link(city1, city2, cityDistance,null);
     link.setUsed(true);
     assertTrue(link.isUsed() == true, "true was not returned on the path");
   }
@@ -82,7 +93,7 @@ class LinkTest {
   void isUsed_false() {
     City city1 = new City(city1Name);
     City city2 = new City(city2Name);
-    Link link = new Link(city1, city2, cityDistance);
+    Link link = new Link(city1, city2, cityDistance,null);
     link.setUsed(false);
     assertTrue(link.isUsed() == false, "false was not returned on the path");
   }
@@ -93,7 +104,7 @@ class LinkTest {
   void setUsed_true() {
     City city1 = new City(city1Name);
     City city2 = new City(city2Name);
-    Link link = new Link(city1, city2, cityDistance);
+    Link link = new Link(city1, city2, cityDistance,null);
     link.setUsed(true);
     assertTrue(link.used == true, "user was not set to true");
   }
@@ -103,7 +114,7 @@ class LinkTest {
   void setUsed_false() {
     City city1 = new City(city1Name);
     City city2 = new City(city2Name);
-    Link link = new Link(city1, city2, cityDistance);
+    Link link = new Link(city1, city2, cityDistance,null);
     link.setUsed(false);
     assertTrue(link.used == false, "user was not set to false");
   }
@@ -114,7 +125,7 @@ class LinkTest {
   void testToString_sorted() {
     City city1 = new City(city1Name);
     City city2 = new City(city2Name);
-    Link link = new Link(city1, city2, cityDistance);
+    Link link = new Link(city1, city2, cityDistance,null);
     String expectedString = city1Name + " " + cityDistance + " " + city2Name;
     String resultString = link.toString();
     City.cities.clear();
@@ -126,7 +137,7 @@ class LinkTest {
   void testToString_unsorted() {
     City city1 = new City(city1Name);
     City city2 = new City(city2Name);
-    Link link = new Link(city2, city1, cityDistance);
+    Link link = new Link(city2, city1, cityDistance,null);
     String expectedString = city1Name + " " + cityDistance + " " + city2Name;
     String resultString = link.toString();
     City.cities.clear();
@@ -139,8 +150,8 @@ class LinkTest {
   void compareTo_equals() {
     City city1 = new City(city1Name);
     City city2 = new City(city2Name);
-    Link link1 = new Link(city1, city2, cityDistance);
-    Link link2 = new Link(city1, city2, cityDistance);
+    Link link1 = new Link(city1, city2, cityDistance, null);
+    Link link2 = new Link(city1, city2, cityDistance,null);
     assertTrue(link1.compareTo(link2) == 0, "compare was not 0");
   }
 
@@ -150,8 +161,8 @@ class LinkTest {
     City city1 = new City(city1Name);
     City city2 = new City(city2Name);
     City city3 = new City(city3Name);
-    Link link1 = new Link(city2, city1, cityDistance);
-    Link link2 = new Link(city3, city1, cityDistance);
+    Link link1 = new Link(city2, city1, cityDistance,null);
+    Link link2 = new Link(city3, city1, cityDistance,null);
     assertTrue(link1.compareTo(link2) < 0, "compare was not negative");
   }
 
@@ -161,8 +172,8 @@ class LinkTest {
     City city1 = new City(city1Name);
     City city2 = new City(city2Name);
     City city3 = new City(city3Name);
-    Link link1 = new Link(city1, city2, cityDistance);
-    Link link2 = new Link(city1, city3, cityDistance);
+    Link link1 = new Link(city1, city2, cityDistance,null);
+    Link link2 = new Link(city1, city3, cityDistance,null);
     assertTrue(link1.compareTo(link2) < 0, "compare was not negative");
   }
 
@@ -172,8 +183,8 @@ class LinkTest {
     City city1 = new City(city1Name);
     City city2 = new City(city2Name);
     City city3 = new City(city3Name);
-    Link link1 = new Link(city2, city3, cityDistance);
-    Link link2 = new Link(city1, city2, cityDistance);
+    Link link1 = new Link(city2, city3, cityDistance,null);
+    Link link2 = new Link(city1, city2, cityDistance,null);
     assertTrue(link1.compareTo(link2) > 0, "compare was not positive");
   }
 }

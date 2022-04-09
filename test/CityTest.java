@@ -36,6 +36,9 @@ class CityTest {
   public static final String city3Name = "City3";
   public static final int cityDistanceShort = 1;
   public static final int cityDistanceLong = 2;
+  public static final String colour1 = "green";
+  public static final String colour2 = "red";
+  public static final String color = null;
 
   /* clear the cities HashMap after every test */
   @AfterEach
@@ -90,9 +93,10 @@ class CityTest {
     City city2 = new City(city2Name);
 
     /* note: creating the link calls addLink() */
-    Link link = new Link(city1, city2, cityDistanceShort);
+    Link link = new Link(city1, city2, cityDistanceShort,colour1);
     assertEquals(numLinks+1, city1.links.size(), "addLink did not increase length of links");
     assertTrue(city1.links.contains(link), "addLink did not add the link to links");
+    assertEquals("green",link.getColor(), "Link added to different color route");
   }
 
   /* 2b. addLink adds a link when links is not empty */
@@ -101,11 +105,11 @@ class CityTest {
     City city1 = new City(city1Name);
     City city2 = new City(city2Name);
     City city3 = new City(city3Name);
-    Link link = new Link(city1, city2, cityDistanceShort);
+    Link link = new Link(city1, city2, cityDistanceShort,colour1);
     int numLinks = city1.links.size();
 
     /* note: creating the link calls addLink() */
-    Link link2 = new Link(city1, city3, cityDistanceLong);
+    Link link2 = new Link(city1, city3, cityDistanceLong,null);
 
     assertEquals(numLinks+1, city1.links.size(), "addLink did not increase length of links");
     assertTrue(city1.links.contains(link2), "addLink did not add the link to links");
@@ -182,10 +186,10 @@ class CityTest {
   void getLinksTo_exists() {
     City city1 = new City(city1Name);
     City city2 = new City(city2Name);
-    Link link = new Link(city1, city2, cityDistanceShort);
+    Link link = new Link(city1, city2, cityDistanceShort,colour2);
     link.setUsed(true);
     Set<Link> routeLinks = new HashSet<Link>();
-    assertTrue(city1.getLinksTo(city2, routeLinks), "getLinkTo returned false when there is a path");
+    assertTrue(city1.getLinksTo(city2, routeLinks,colour2), "getLinkTo returned false when there is a path");
     assertTrue(routeLinks.contains(link), "getLinkTo did not add link to routeLinks");
   }
 
@@ -195,7 +199,7 @@ class CityTest {
     City city1 = new City(city1Name);
     City city2 = new City(city2Name);
     Set<Link> routeLinks = new HashSet<Link>();
-    assertFalse(city1.getLinksTo(city2, routeLinks), "getLinkTo returned true when there is no path");
+    assertFalse(city1.getLinksTo(city2, routeLinks,null), "getLinkTo returned true when there is no path");
   }
 
 }
