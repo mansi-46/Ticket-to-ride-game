@@ -94,12 +94,8 @@ public class RouteCost {
       input = inp.nextLine();
     }
 
-    int total = 0;
-    System.out.println("The rail network consists of:");
-    for (Link l : links) {
-      System.out.println("  " + l);
-      total += l.getLength();
-    }
-    System.out.println("The total cost is: " + total);
+    cost c = new cost();
+    c.getCost(links);
+    System.out.println(c.toString());
   }
 }

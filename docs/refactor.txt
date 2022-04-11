@@ -1,16 +1,30 @@
 List of Refactorings
 ====================
 
-Name/Banner# of Developer 1: Mansi Patel/B00871094
+Name/Banner# of Developer: Mansi Patel/B00871094
 
 Refactorings:
 =============
 
 1.
    File: City.java
-   Location (method/approx. line #):
+   Location (method/approx. line #): City.java, Link.java
    Description:  Make a new class for players which has list of players and the
                  color the player has chosen. This in turn will be linked to city
                  where it will create links of that particular colour
    Implemented: No
-   
+
+2. File: RouteCost.java, cost.java
+   Location: Line 9 to 66
+   Description: The input code that are taken in RouteCost class can be
+                transferred to some other java class which is only for input
+                and the RouteCost class can only be there for calculation costs of routes
+   Implementation: Yes (Junit test created)
+
+3. File: RouteCost.java
+   Description: it is possible to create to different classes for coloured links and uncolored links and routes
+   Implementation: No.
+
+4. File: RouteCost.java
+   Description: It is possible to create interfaces for different cities and different links
+   Implementation: No.
