@@ -3,7 +3,7 @@ import java.util.TreeSet;
 This class is to calculate cost of different routes
  */
 public class cost {
-    int total = 0;
+    private int total = 0;
 
     //prints different route networks and cost of building those networks.
     public int getCost(TreeSet<Link> links) {
